@@ -1,12 +1,12 @@
-# Recommendation
+## Recommendation
 For a full gallery scrape, have at least 100 GB of free space available.
 If you want to be absolutely safe, and especially if you plan to download original TIFFs or all available full-res images, consider 250–500 GB or more.
 
-# NASA Gallery Image Downloader
+## NASA Gallery Image Downloader
 
 This Python script automatically downloads images from the NASA gallery, with multithreading, logging, and error handling.
 
-## Usage
+### Usage
 
 1. **Dependency and environment setup:**
 
@@ -22,7 +22,7 @@ python setup_nasa_image_downloader.py
 python nasa_image_downloader.py [-d DOWNLOAD_DIR] [-w NUM_THREADS] [-r RETRIES] [--min-size PIXELS] [--retry-failed]
 ```
 
-### Examples
+#### Examples
 
 - Use the default download folder:  
   `python nasa_image_downloader.py`
@@ -31,7 +31,7 @@ python nasa_image_downloader.py [-d DOWNLOAD_DIR] [-w NUM_THREADS] [-r RETRIES] 
 - Retry only the failed downloads:  
   `python nasa_image_downloader.py --retry-failed`
 
-## Main features
+### Main features
 
 - Fully configurable via command-line arguments.
 - Rotating logging: max 2MB, 3 old logs.
@@ -39,12 +39,12 @@ python nasa_image_downloader.py [-d DOWNLOAD_DIR] [-w NUM_THREADS] [-r RETRIES] 
 - Image size, number of threads, and retries are configurable.
 - Fully English code and logging/messages.
 
-## Log files
+### Log files
 
 - `scraper_log.txt`: Log of all events.
 - `downloaded_images.txt`: URLs of successfully downloaded images.
 - `failed_downloads.txt`: URLs of failed downloads (can be retried).
 
-## License
+### License
 
 See LICENSE file.
