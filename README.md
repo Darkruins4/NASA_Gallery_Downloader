@@ -1,6 +1,9 @@
 # !!This is NOT tested!!
 
-(And please read the "About" section")
+(And please read the "Story" section")
+
+# Story
+As you may have already read, this hasn’t been tested, so run it at your own risk. It was 100% made by AI because I don’t understand anything about programming. Now you might ask, “Then why did you make it?” Well, I made it because I was bored during spring break and because there are some cool images there. So yeah, I kind of got bored of the whole thing (though to be honest, I didn’t really have to do much—just copy-pasting stuff here and there), so I’m probably not going to touch the full project again (maybe in 10 years or so). The license is included, so if someone stumbles upon this, understands it, and actually reads all this somehow, feel free to do whatever you want with it (well, not anything, don’t drift too far from the original idea).
 
 # This is made by using: 
 - ChatGPT (GPT-4o)
