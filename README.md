@@ -1,9 +1,9 @@
 # This is made by using: 
--ChatGPT (GPT-4o)
--GitHub Copilot (GPT-4.1)
--Claude (3.7 Sonnet)
--Perplexity (Perplexity Pro)
--Google Cloud Assistant (Preview)
+- ChatGPT (GPT-4o)
+- GitHub Copilot (GPT-4.1)
+- Claude (3.7 Sonnet)
+- Perplexity (Perplexity Pro)
+- Google Cloud Assistant (Preview)
 
 ## Recommendation
 For a full gallery scrape, have at least 100 GB of free space available.
