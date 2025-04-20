@@ -1,3 +1,7 @@
+# Recommendation
+For a full gallery scrape, have at least 100 GB of free space available.
+If you want to be absolutely safe, and especially if you plan to download original TIFFs or all available full-res images, consider 250–500 GB or more.
+
 # NASA Gallery Image Downloader
 
 This Python script automatically downloads images from the NASA gallery, with multithreading, logging, and error handling.
