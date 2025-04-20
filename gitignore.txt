@@ -1,0 +1,7 @@
+NASA_images/
+*.log
+*.txt
+__pycache__/
+chromedriver/
+.chromedriver/
+.env
