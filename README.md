@@ -1,5 +1,7 @@
 # !!This is NOT tested!!
 
+(And please read the "About" section")
+
 # This is made by using: 
 - ChatGPT (GPT-4o)
 - GitHub Copilot (GPT-4.1)
