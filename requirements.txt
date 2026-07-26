@@ -1,5 +1,2 @@
-requests
-beautifulsoup4
-selenium
-webdriver_manager
-pillow
+requests>=2.31.0
+pillow>=10.0.0
