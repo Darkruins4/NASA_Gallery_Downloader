@@ -86,8 +86,12 @@ class ModernNASAGUI(ctk.CTk):
         """Hard exit event handler to release ports and flush thread pools instantly from the OS layer."""
         print("\n[SHUTDOWN] Hard intercept triggered. Terminating background runtime pipelines...")
         self.destroy()
-        sys.exit(0) # Force quit the master Python interpreter loop immediately
-
+        
+        # OS-level hard kill: shuts down the entire process instantly from the Windows kernel
+        import os
+        import signal
+        os.kill(os.getpid(), signal.SIGTERM)
+        
     def _update_slider_text(self, value):
         self.slider_label.configure(text=f"Active Background Worker Threads: {int(value)}")
 
