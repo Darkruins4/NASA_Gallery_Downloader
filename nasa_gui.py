@@ -102,9 +102,15 @@ class ModernNASAGUI(ctk.CTk):
             self.dir_label.configure(text=f"Output Path: ...{self.target_dir[-40:]}")
 
     def _append_gui_log(self, text):
+        """Appends log messages to the GUI text area while maintaining scroll position."""
+        is_at_bottom = self.log_textbox.yview()[1] >= 0.9
+
         self.log_textbox.configure(state="normal")
         self.log_textbox.insert("end", text)
-        self.log_textbox.see("end")
+        
+        if is_at_bottom:
+            self.log_textbox.see("end")
+            
         self.log_textbox.configure(state="disabled")
 
     def _check_log_queue(self):
