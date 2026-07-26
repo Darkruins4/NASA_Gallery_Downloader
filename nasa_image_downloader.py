@@ -81,7 +81,7 @@ class ModernNASADownloader:
     def __init__(self, args, logger):
         self.args = args
         self.logger = logger
-        self.api_url = "https://nasa.gov"
+        self.api_url = "https://githubusercontent.com"
         self.lock = threading.Lock()
         self.failed_file_path = os.path.join(self.args.dir, FAILED_DOWNLOADS_FILE)
         self.success_file_path = os.path.join(self.args.dir, LOG_FILE)
@@ -120,7 +120,7 @@ class ModernNASADownloader:
     def fetch_api_clusters(self):
         """Discovers asset structural targets directly via API lookup pipelines."""
         self.logger.info(f"Querying central API registry for keyword: '{self.args.query}'...")
-        params = {"api_key": "DEMO_KEY", "count": 10}
+        params = {}
         
         try:
             response = requests.get(self.api_url, params=params, headers=self._get_headers(), timeout=15)
