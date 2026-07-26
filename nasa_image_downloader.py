@@ -42,7 +42,7 @@ USER_AGENTS = [
 def parse_args():
     parser = argparse.ArgumentParser(description="Modern Multithreaded NASA Gallery Image Downloader via Official API")
     parser.add_argument("-q", "--query", type=str, default="nebula", help="Search keyword for NASA assets (e.g., mars, apollo, saturn)")
-    parser.add_argument("-d", "--dir", default=os.path.join("D:", "HDD", "NASA_images"), help="Target download directory path")
+    parser.add_argument("-d", "--dir", default="nasa_images_output", help="Target download directory path")
     parser.add_argument("-w", "--workers", type=int, default=3, help="Number of parallel concurrent download threads")
     parser.add_argument("-r", "--retries", type=int, default=3, help="Maximum number of retries per image download attempt")
     parser.add_argument("--retry-failed", action="store_true", help="Only retry assets listed in failed_downloads.txt")
