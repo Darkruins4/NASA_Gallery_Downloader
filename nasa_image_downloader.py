@@ -81,7 +81,7 @@ class ModernNASADownloader:
     def __init__(self, args, logger):
         self.args = args
         self.logger = logger
-        self.api_url = "https://nasa.gov"
+        self.api_url = "https://images-api.nasa.gov/search"
         self.lock = threading.Lock()
         self.failed_file_path = os.path.join(self.args.dir, FAILED_DOWNLOADS_FILE)
         self.success_file_path = os.path.join(self.args.dir, LOG_FILE)
