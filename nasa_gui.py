@@ -3,6 +3,7 @@ import sys
 import subprocess
 import threading
 import queue
+import logging
 
 # --- AUTOMATIC GUI DEPENDENCY MANAGEMENT ---
 try:
