@@ -108,7 +108,7 @@ class ModernNASAGUI(ctk.CTk):
         try:
             from nasa_image_downloader import ModernNASADownloader
             downloader = ModernNASADownloader(args, logger)
-            downloader.execute()
+            downloader.run()
         except Exception as e:
             logger.critical(f"GUI Thread runner suffered critical crash framework mapping: {e}")
         finally:
