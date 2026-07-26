@@ -87,7 +87,7 @@ class ModernNASADownloader:
         self.success_file_path = os.path.join(self.args.dir, LOG_FILE)
 
     def _get_headers(self):
-        return {"User-Agent": random.choice(USER_AGENTS)}
+        return {"User-Agent": random.choice(USER_AGENTS), "Accept": "application/json"}
 
     def _save_status(self, filepath, url):
         """Thread-safe analytical logging engine."""
