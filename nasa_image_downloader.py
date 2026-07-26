@@ -125,6 +125,7 @@ class ModernNASADownloader:
         try:
             response = requests.get(self.api_url, params=params, headers=self._get_headers(), timeout=15)
             response.raise_for_status()
+            print(f"DEBUG - Status Code: {response.status_code} | First 200 chars of response: {response.text[:200]}")
             data = response.json()
             
             urls = []
