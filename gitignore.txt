@@ -1,7 +1,28 @@
+# --- Project Specific Outputs ---
+nasa_images_output/
 NASA_images/
+
+# --- Operational Tracking Files (Do NOT ignore structural tracking txt files) ---
+scraper_log.txt
 *.log
-*.txt
+
+# --- Python Environment ---
 __pycache__/
-chromedriver/
-.chromedriver/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+ENV/
+env/
+
+# --- Environment Variables & Secrets ---
 .env
+.env.local
+
+# --- IDE and System Junk ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
