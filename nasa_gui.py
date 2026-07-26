@@ -30,8 +30,9 @@ class ModernNASAGUI(ctk.CTk):
         super().__init__()
 
         # --- WINDOW CONFIGURATION ---
+        # Expanded height slightly to perfectly fit the new limit input field
         self.title("NASA Gallery Downloader - Modern Edition")
-        self.geometry("700x550")
+        self.geometry("700x620")
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")
 
@@ -53,7 +54,14 @@ class ModernNASAGUI(ctk.CTk):
         self.query_label.pack(pady=(10, 0))
         self.query_entry = ctk.CTkEntry(self, width=400, placeholder_text="Enter keyword here...")
         self.query_entry.insert(0, "nebula")
-        self.query_entry.pack(pady=(0, 15))
+        self.query_entry.pack(pady=(0, 10))
+
+        # NEW ENHANCEMENT: Max Image Limit Input Field
+        self.limit_label = ctk.CTkLabel(self, text="Maximum Image Download Limit:", font=ctk.CTkFont(size=13))
+        self.limit_label.pack(pady=(5, 0))
+        self.limit_entry = ctk.CTkEntry(self, width=400, placeholder_text="Enter maximum image count (e.g., 50, 200, 500)...")
+        self.limit_entry.insert(0, "200") # Defaulted to 200 to test pagination loops out of the box
+        self.limit_entry.pack(pady=(0, 15))
 
         # 3. Directory Configuration Panel
         self.dir_frame = ctk.CTkFrame(self, fg_color="transparent")
@@ -138,6 +146,7 @@ class ModernNASAGUI(ctk.CTk):
     def _reset_ui_state(self):
         self.start_button.configure(state="normal", text="START ASYNCHRONOUS DOWNLOAD")
         self.query_entry.configure(state="normal")
+        self.limit_entry.configure(state="normal") # Added to reset routine
         self.dir_button.configure(state="normal")
         self.worker_slider.configure(state="normal")
 
@@ -145,10 +154,17 @@ class ModernNASAGUI(ctk.CTk):
         # Prevent parallel process double activation
         self.start_button.configure(state="disabled", text="STREAMING ACTIVE...")
         self.query_entry.configure(state="disabled")
+        self.limit_entry.configure(state="disabled") # Added to disabling routine
         self.dir_button.configure(state="disabled")
         self.worker_slider.configure(state="disabled")
 
         os.makedirs(self.target_dir, exist_ok=True)
+
+        # Parse user limit safely, fallback to 100 if input is invalid text string
+        try:
+            image_limit = int(self.limit_entry.get())
+        except ValueError:
+            image_limit = 100
 
         # Mock argument parameters parsing engine seamlessly to feed into your original class structure
         import argparse
@@ -158,7 +174,8 @@ class ModernNASAGUI(ctk.CTk):
             workers=int(self.worker_slider.get()),
             retries=3,
             retry_failed=False,
-            min_size=100
+            min_size=100,
+            max_images=image_limit # Dynamic input injection
         )
 
         # Intercept main log structures and bind custom QueueHandler
