@@ -43,6 +43,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Modern Multithreaded NASA Gallery Image Downloader via Official API")
     parser.add_argument("-q", "--query", type=str, default="nebula", help="Search keyword for NASA assets (e.g., mars, apollo, saturn)")
     parser.add_argument("-d", "--dir", default="nasa_images_output", help="Target download directory path")
+    parser.add_argument("--max-images", type=int, default=100, help="Maximum number of total images to download across all pages")
     parser.add_argument("-w", "--workers", type=int, default=3, help="Number of parallel concurrent download threads")
     parser.add_argument("-r", "--retries", type=int, default=3, help="Maximum number of retries per image download attempt")
     parser.add_argument("--retry-failed", action="store_true", help="Only retry assets listed in failed_downloads.txt")
@@ -118,28 +119,48 @@ class ModernNASADownloader:
             return False
 
     def fetch_api_clusters(self):
-        """Discovers asset structural targets directly via API lookup pipelines."""
-        self.logger.info(f"Querying central API registry for keyword: '{self.args.query}'...")
-        params = {"q": self.args.query, "media_type": "image"}
+        """Queries the official endpoint using pagination loops to discover up to max_images targets."""
+        self.logger.info(f"Querying central API registry for keyword: '{self.args.query}' (Max Limit: {getattr(self.args, 'max_images', 100)})...")
         
-        try:
-            response = requests.get(self.api_url, params=params, headers=self._get_headers(), timeout=15)
-            response.raise_for_status()
-            print(f"DEBUG - Status Code: {response.status_code} | First 200 chars of response: {response.text[:200]}")
-            data = response.json()
+        urls = []
+        page = 1
+        max_limit = getattr(self.args, 'max_images', 100)
+        
+        while len(urls) < max_limit:
+            # We dynamically inject the current page counter into the API params
+            params = {
+                "q": self.args.query, 
+                "media_type": "image",
+                "page": page
+            }
             
-            urls = []
-            items = data.get("collection", {}).get("items", [])
-            for item in items:
-                href = item.get("href")
-                if href:
-                    urls.append(href)
-            
-            self.logger.info(f"Data discovery phase completed. Found {len(urls)} target items.")
-            return urls
-        except Exception as e:
-            self.logger.error(f"Remote server lookup failed: {e}")
-            return []
+            try:
+                response = requests.get(self.api_url, params=params, headers=self._get_headers(), timeout=15)
+                response.raise_for_status()
+                data = response.json()
+                
+                items = data.get("collection", {}).get("items", [])
+                if not items:
+                    # No more items available on the remote server, break the pagination loop
+                    break
+                    
+                for item in items:
+                    href = item.get("href")
+                    if href:
+                        urls.append(href)
+                        if len(urls) >= max_limit:
+                            break
+                            
+                self.logger.info(f"Page {page} processed. Total discovered items so far: {len(urls)}")
+                page += 1
+                time.sleep(1) # Polite delay between structural page jumps
+                
+            except Exception as e:
+                self.logger.error(f"API endpoint lookup failure on page {page}: {e}")
+                break
+                
+        self.logger.info(f"Discovery phase completed. Identified {len(urls)} total target items.")
+        return urls
 
     def download_image_from_cluster(self, asset_json_url):
         """Processes an asset cluster and downloads the highest resolution file available."""
