@@ -120,7 +120,7 @@ class ModernNASADownloader:
     def fetch_api_clusters(self):
         """Discovers asset structural targets directly via API lookup pipelines."""
         self.logger.info(f"Querying central API registry for keyword: '{self.args.query}'...")
-        params = {"q": self.args.query, "media_type": "image"}
+        params = {"api_key": "DEMO_KEY", "count": 10}
         
         try:
             response = requests.get(self.api_url, params=params, headers=self._get_headers(), timeout=15)
