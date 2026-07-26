@@ -39,6 +39,10 @@ class ModernNASAGUI(ctk.CTk):
         self.log_queue = queue.Queue()
         self.target_dir = os.path.join(os.path.expanduser("~"), "Downloads", "nasa_gui_downloads")
 
+        # --- MANDATORY PROTOCOL DESTRUCTION INTERCEPTOR ---
+        # This forces the operating system to forcefully kill all Python child threads when the GUI window 'X' is clicked.
+        self.protocol("WM_DELETE_WINDOW", self._force_terminate_lifecycle)
+
         # --- UI LAYOUT DESIGN ---
         # 1. Header Title
         self.title_label = ctk.CTkLabel(self, text="NASA IMAGE STREAMING PIPELINE", font=ctk.CTkFont(size=20, weight="bold"))
@@ -77,6 +81,12 @@ class ModernNASAGUI(ctk.CTk):
 
         # Initialize background periodic queue check loop
         self.after(100, self._check_log_queue)
+
+    def _force_terminate_lifecycle(self):
+        """Hard exit event handler to release ports and flush thread pools instantly from the OS layer."""
+        print("\n[SHUTDOWN] Hard intercept triggered. Terminating background runtime pipelines...")
+        self.destroy()
+        sys.exit(0) # Force quit the master Python interpreter loop immediately
 
     def _update_slider_text(self, value):
         self.slider_label.configure(text=f"Active Background Worker Threads: {int(value)}")
@@ -142,7 +152,6 @@ class ModernNASAGUI(ctk.CTk):
         )
 
         # Intercept main log structures and bind custom QueueHandler
-        import logging
         logger = logging.getLogger("nasa_scraper")
         logger.setLevel(logging.INFO)
         
