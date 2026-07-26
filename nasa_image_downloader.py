@@ -81,7 +81,7 @@ class ModernNASADownloader:
     def __init__(self, args, logger):
         self.args = args
         self.logger = logger
-        self.api_url = "https://githubusercontent.com"
+        self.api_url = "https://raw.githubusercontent.com"
         self.lock = threading.Lock()
         self.failed_file_path = os.path.join(self.args.dir, FAILED_DOWNLOADS_FILE)
         self.success_file_path = os.path.join(self.args.dir, LOG_FILE)
