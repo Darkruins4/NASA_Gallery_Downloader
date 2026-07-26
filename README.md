@@ -1,4 +1,4 @@
-# NASA Gallery Image Downloader (Modern AI-Orchestrated Suite)
+# NASA Gallery Image Downloader
 
 A high-performance, production-grade Python desktop application and command-line utility designed to search and stream high-resolution space photography directly from the official NASA API endpoint.
 
