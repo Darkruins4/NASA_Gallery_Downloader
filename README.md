@@ -1,4 +1,4 @@
-# NASA Gallery Image Downloader (Modern AI-Orchestrated Suite)
+# NASA Gallery Image Downloader
 
 A high-performance, production-grade Python desktop application and command-line utility designed to search and stream high-resolution space photography directly from the official NASA API endpoint.
 
@@ -7,7 +7,7 @@ This project was originally born out of pure boredom during a spring break. Sinc
 
 As I prepare for my professional software engineering journey, this project has been completely refactored! We threw out the old, slow browser automation (Selenium) and rebuilt the entire core to use NASA's direct API. It now features a robust Command-Line Interface (CLI) and a sleek Graphical User Interface (GUI), both fully optimized, production-grade, and resilient against network dropouts.
 
-### 🤖 Built with Advanced AI Orchestration
+### 🤖 Built with AI
 This software represents the modern paradigm of human-AI collaboration. By combining programmatic system design with cutting-edge reasoning models, this architecture was engineered using:
 - **Google Gemini (Advanced/Ultra Architecture)** — Main architectural refactoring, GUI multi-threading integration, viewport auto-scroll locks, and thread-safe implementation.
 - **Claude (3.7 Sonnet)** — Initial codebase logic exploration and structural debugging.
