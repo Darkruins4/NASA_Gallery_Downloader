@@ -42,7 +42,7 @@ python nasa_image_downloader.py [-q QUERY] [-d DOWNLOAD_DIR] [-w WORKERS] [-r RE
 
 #### Examples
 - **Custom search with 5 threads:**  
-  `python nasa_image_downloader.py -q "apollo" -d "C:/SpacePhotos" -w 5`
+  `python nasa_image_downloader.py -q "apollo" -d "nasa_real_downloads" -w 5`
 - **Isolate and retry failed network drops only:**  
   `python nasa_image_downloader.py --retry-failed`
 
