@@ -1,4 +1,4 @@
-# NASA Gallery Image Downloader
+# NASA Gallery Image Downloader (Modern AI-Orchestrated Suite)
 
 A high-performance, production-grade Python desktop application and command-line utility designed to search and stream high-resolution space photography directly from the official NASA API endpoint.
 
@@ -9,7 +9,7 @@ As I prepare for my professional software engineering journey, this project has 
 
 ### 🤖 Built with AI
 This software represents the modern paradigm of human-AI collaboration. By combining programmatic system design with cutting-edge reasoning models, this architecture was engineered using:
-- **Google Gemini (Advanced/Ultra Architecture)** — Main architectural refactoring, GUI multi-threading integration, viewport auto-scroll locks, and thread-safe implementation.
+- **Google Gemini (Advanced/Ultra Architecture)** — Main architectural refactoring, GUI multi-threading integration, viewport auto-scroll locks, pagination logic, and thread-safe implementation.
 - **Claude (3.7 Sonnet)** — Initial codebase logic exploration and structural debugging.
 - **ChatGPT (GPT-4o)** — Prompt engineering and syntax experimentation.
 - **Perplexity Pro & Google Cloud Assistant** — Research, documentation baseline, and API mapping.
@@ -18,12 +18,13 @@ This software represents the modern paradigm of human-AI collaboration. By combi
 For a full gallery crawl, have at least **100 GB** of free space available. If you want to be absolutely safe—especially if you plan to download original uncompressed files or full-resolution masters—consider archiving on a drive with **250–500 GB** or more.
 
 ## ✨ Main Features
-- **Modern Desktop GUI Dashboard:** Clean visual layout powered by `customtkinter` with native Dark Mode, a thread pool control slider, and directory browser.
+- **Modern Desktop GUI Dashboard:** Clean visual layout powered by `customtkinter` with native Dark Mode, a thread pool control slider, dynamic action states, and a directory browser.
 - **Official NASA API Integration:** Direct server communication that bypasses visual web-scraping entirely. Completely immune to future NASA website front-end redesigns.
+- **Automated Data Pagination:** Features a smart loop sequence that dynamically handles page counters, automatically fetching thousands of images sequentially across remote servers.
 - **Asynchronous Multithreading:** Spawns parallel background worker pipelines (`ThreadPoolExecutor`) to ensure maximum network speeds while keeping the GUI completely responsive.
 - **Instant Abort Kill-Switch:** A dynamic button interface that maps immediate execution termination signals directly into background tasks, dropping processing queues instantly.
 - **Intelligent Auto-Scroll Lock:** The integrated log terminal monitor checks your viewport position (`yview()`), pausing autoscroll if you scroll up to inspect a line.
-- **Structural Integrity Validation:** Parses binary structures via Pillow to filter out corrupted files or thumbnails below your custom size thresholds.
+- **Structural Integrity Validation:** Parses binary structures via Pillow to filter out corrupted files or thumbnails below your custom size thresholds while enforcing data safety bounds against decompression exploits.
 - **Automatic Environment Management:** Integrated bootstrapper verifies and installs runtime packages (`requests`, `pillow`, `customtkinter`) natively at launch.
 
 ## 🚀 Usage Guide
@@ -31,7 +32,7 @@ For a full gallery crawl, have at least **100 GB** of free space available. If y
 The suite requires **Python 3.8+** and manages its own dependencies automatically.
 
 ### Option A: Running the Desktop GUI (Recommended)
-Launch the modern visual interface to handle configurations via sliders and click buttons:
+Launch the modern visual interface to handle configurations via sliders and numerical limit entry inputs:
 ```sh
 python nasa_gui.py
 ```
@@ -44,9 +45,9 @@ python nasa_image_downloader.py
 
 #### Advanced CLI Configurations
 ```sh
-python nasa_image_downloader.py [-q QUERY] [-d DOWNLOAD_DIR] [-w WORKERS] [-r RETRIES] [--min-size PIXELS] [--retry-failed]
+python nasa_image_downloader.py [-q QUERY] [-d DOWNLOAD_DIR] [-w WORKERS] [-r RETRIES] [--min-size PIXELS] [--max-images COUNT] [--retry-failed]
 ```
-- **Custom search with 5 workers:** `python nasa_image_downloader.py -q "apollo" -d "nasa_real_downloads" -w 5`
+- **Bulk download with 5 workers and 250 image limit:** `python nasa_image_downloader.py -q "apollo" -d "nasa_real_downloads" -w 5 --max-images 250`
 - **Isolate and retry failed network drops only:** `python nasa_image_downloader.py --retry-failed`
 
 ### 📋 Command-Line Arguments Matrix
@@ -58,6 +59,7 @@ python nasa_image_downloader.py [-q QUERY] [-d DOWNLOAD_DIR] [-w WORKERS] [-r RE
 | `-w` | `--workers` | `3` | `int` | Number of concurrent processing download threads. |
 | `-r` | `--retries` | `3` | `int` | Maximum network failure download retries allowed per asset. |
 | | `--min-size` | `100` | `int` | Minimum acceptable resolution dimension in pixels. |
+| | `--max-images`| `100` | `int` | Maximum number of total images to download using pagination loops. |
 | | `--retry-failed` | *False* | `flag` | Re-queues only the assets listed in `failed_downloads.txt`. |
 
 ## 📂 System Log Files
