@@ -198,12 +198,20 @@ class ModernNASADownloader:
                 if self._is_valid_image(filepath):
                     self.logger.info(f"Successfully downloaded asset: {filename}")
                     self._save_status(self.success_file_path, best_image_url)
-                    return True
-                else:
-                    if os.path.exists(filepath):
-                        os.remove(filepath)
-                    raise ValueError("File failed integrity validation routines.")
                     
+                    if hasattr(self.args, 'gui_parent') and filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+                        try:
+                            from PIL import Image
+                            pil_img = Image.open(filepath)
+                            
+                            pil_img = pil_img.resize((160, 120), Image.Resampling.BILINEAR)
+                            
+                            self.args.gui_parent.image_queue.put((filepath, pil_img))
+                        except Exception:
+                            pass
+
+                    return True
+
             except Exception as e:
                 retries += 1
                 self.logger.warning(f"Transient fault at target {asset_json_url}. Retry {retries}/{self.args.retries}. Error: {e}")
