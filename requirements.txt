@@ -1,3 +1,5 @@
-requests>=2.34.2
-pillow>=12.3.0
-customtkinter>=6.0.0
+# --- NASA Gallery Workstation Core Dependencies ---
+# Verified operating parameters under Python 3.14.6 environments
+requests==2.34.2
+pillow==12.3.0
+customtkinter==6.0.0
